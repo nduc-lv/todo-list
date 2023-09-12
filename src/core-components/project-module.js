@@ -23,8 +23,8 @@ const createProject = (title) => {
     //sort todos by priority
     //compare based on priority
     const compare = (todo1, todo2) => {
-        let todo1Info = todo1.getTodo();
-        let todo2Info = todo2.getTodo();
+        let todo1Info = todo1.getInfo();
+        let todo2Info = todo2.getInfo();
         if (todo1Info.priority < todo2Info.priority){
             return -1
         }

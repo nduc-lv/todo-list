@@ -1,5 +1,5 @@
 import App from './core-components/app-module';
-
+import projectController from './display-components/project/project-loader';
 //FLOW OF THE App
 //create a new project
 App.addProject("New Project");
@@ -14,6 +14,6 @@ let todoInfo = {
 } 
 //get user input from display controller
 project.addTodo(todoInfo);
-
 console.log(project.getTodo(0).getInfo());
 console.log(App.showApp());
+projectController(project);
