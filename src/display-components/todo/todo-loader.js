@@ -20,6 +20,7 @@ const createEditButton = (index) => {
     const e = document.createElement('button');
     e.classList.add('edit-button');
     e.textContent = "Edit";
+    e.value = "edit";
     e.dataset.index = index;
     return e;
 }
@@ -27,6 +28,7 @@ const createDeleteButton = (index) => {
     const e = document.createElement('button');
     e.classList.add('delete-button');
     e.textContent = "Delete";
+    e.value = "delete";
     e.dataset.index = index;
     return e;
 }
