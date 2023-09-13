@@ -1,21 +1,21 @@
-import createTodo from '../todo/todo-loader';
+import createTodo from "../todo/todo-loader";
 
-const content = document.querySelector('#content');
-const dialog = document.querySelector('#project-modal');
-const confirmButton = document.querySelector('#project-confirm');
-const cancelButton = document.querySelector('#project-cancel');
+const content = document.querySelector("#content");
+const dialog = document.querySelector("#project-modal");
+const confirmButton = document.querySelector("#project-confirm");
+const cancelButton = document.querySelector("#project-cancel");
 
 // create static element of the page
 const createProjectContainer = () => {
-  const e = document.createElement('div');
-  e.classList.add('project-container');
+  const e = document.createElement("div");
+  e.classList.add("project-container");
   return e;
 };
 const createNewButton = () => {
-  const e = document.createElement('button');
-  e.textContent = 'Add';
-  e.classList.add('new-todo-button');
-  e.addEventListener('click', () => {
+  const e = document.createElement("button");
+  e.textContent = "Add";
+  e.classList.add("new-todo-button");
+  e.addEventListener("click", () => {
     dialog.show();
   });
   return e;
@@ -27,8 +27,8 @@ content.appendChild(projectContainer);
 
 // create dynamically elements of the page
 const createProjectTitle = (title) => {
-  const e = document.createElement('div');
-  e.classList.add('project-title');
+  const e = document.createElement("div");
+  e.classList.add("project-title");
   e.textContent = title;
   return e;
 };
@@ -43,10 +43,10 @@ const createProjectContent = (todos) => {
 };
 // get informantion of the form
 const getInfo = () => {
-  const title = document.querySelector('#title').value;
-  const description = document.querySelector('#description').value;
-  const time = document.querySelector('#time').value;
-  const priority = document.querySelector('#priority').value;
+  const title = document.querySelector("#title").value;
+  const description = document.querySelector("#description").value;
+  const time = document.querySelector("#time").value;
+  const priority = document.querySelector("#priority").value;
   const todoInfo = {
     title,
     description,
@@ -72,7 +72,7 @@ const projectController = (project) => {
   let info = null;
 
   const renderProject = () => {
-    projectContainer.textContent = '';
+    projectContainer.textContent = "";
     project.sortTodo();
     todos = project.showProject();
     projectTitle = project.getProjectTitle();
@@ -80,20 +80,28 @@ const projectController = (project) => {
   };
   renderProject();
 
-  newButton.addEventListener('click', () => {
-    confirmButton.value = 'add';
-    console.log(confirmButton.value);
+  newButton.addEventListener("click", () => {
+    confirmButton.value = "add";
     dialog.show();
   });
 
-  projectContainer.addEventListener('click', (e) => {
+  projectContainer.addEventListener("click", (e) => {
     const source = e.target;
     const { index } = source.dataset;
-    if (source.value === 'edit') {
-      confirmButton.value = 'edit';
+    if (source.value === "edit") {
+      confirmButton.value = "edit";
       confirmButton.dataset.index = index;
+
+      // show the current status of todo
+      const todo = project.getTodo(index).getInfo();
+      const properties = Object.keys(todo);
+      for (let i = 0; i < properties.length; i += 1) {
+        const property = properties[i];
+        const element = document.querySelector(`#${property}`);
+        element.value = todo[property];
+      }
       dialog.show();
-    } else if (source.value === 'delete') {
+    } else if (source.value === "delete") {
       project.deleteTodo(index);
       renderProject();
     }
@@ -104,24 +112,24 @@ const projectController = (project) => {
     renderProject();
   };
 
-  confirmButton.addEventListener('click', (e) => {
+  confirmButton.addEventListener("click", (e) => {
     e.preventDefault();
     info = getInfo();
-    console.log(confirmButton.value);
-    if (confirmButton.value === 'add') {
-      console.log(info);
+    if (confirmButton.value === "add") {
       addTodo(info);
-    } else if (confirmButton.value === 'edit') {
+    } else if (confirmButton.value === "edit") {
       const source = e.target;
       const { index } = source.dataset;
       project.getTodo(index).updateTodo(info);
       renderProject();
     }
-    confirmButton.value = 'default';
+    confirmButton.value = "default";
     dialog.close();
   });
 
-  cancelButton.addEventListener('click', () => {
+  cancelButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    renderProject();
     dialog.close();
   });
 };

@@ -1,5 +1,5 @@
 // PROJECTS OBJECTS
-import createTodo from './todo-module';
+import createTodo from "./todo-module";
 
 const createProject = (title) => {
   const projectTitle = title;
@@ -23,7 +23,7 @@ const createProject = (title) => {
   const compare = (todo1, todo2) => {
     const todo1Info = todo1.getInfo();
     const todo2Info = todo2.getInfo();
-    if (todo1Info.priority < todo2Info.priority) {
+    if (+todo1Info.priority < +todo2Info.priority) {
       return -1;
     }
     return 1;

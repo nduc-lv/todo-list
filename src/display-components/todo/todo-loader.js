@@ -1,4 +1,4 @@
-//Display todo
+// Display todo
 
 const createTodoContainer = () => {
   const e = document.createElement("div");
@@ -7,7 +7,7 @@ const createTodoContainer = () => {
 };
 const createTodoContent = (todoInfo) => {
   console.log(todoInfo);
-  let todoContent = [];
+  const todoContent = [];
   for (const property in todoInfo) {
     const e = document.createElement("div");
     e.classList.add(`todo-${property}`);
@@ -40,7 +40,7 @@ const createTodo = (index, todoInfo) => {
   const editButton = createEditButton(index);
   const deleteButton = createDeleteButton(index);
 
-  //append elements to the container
+  // append elements to the container
   for (const element of todoContent) {
     todoContainer.appendChild(element);
     todoContainer.appendChild(editButton);

@@ -1,10 +1,8 @@
-//TODO OBJECTS
+// TODO OBJECTS
 
 const createTodo = (todoInfo) => {
   let todo = todoInfo;
-  const getInfo = () => {
-    return todo;
-  };
+  const getInfo = () => todo;
   const updateTodo = (newTodoInfo) => {
     todo = newTodoInfo;
   };
